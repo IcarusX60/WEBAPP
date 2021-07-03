@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block title%} Document Clustering {% endblock %}
+{% block body %}
+
+
+<br>
+<br>
+<br>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{% for cluster, bluster in mylist %}
+<button class="tablink" onclick="openPage('{{forloop.counter}}', this, 'red')">Cluster No. {{cluster.cluster_no}}</button>
+<div id={{forloop.counter}} class="tabcontent">
+    <h1>Cluster No. {{cluster.cluster_no}}</h1>
+    <h3>Total number of articles in cluster: {{cluster.item_count}}</h3>
+    {% for article in cluster.particle_set.all %}
+    <div>
+        <article>
+            <h2>{{article.headline}}</h2>
+        
+            <p>{{article.content}}</p>
+        </article>
+    </div>
+    {% endfor %}
+    <h1>Other Articles In the cluster</h1>
+    {% for barticle in bluster.article_set.all %}
+    <div>
+        <article>
+            <h2>{{barticle.headline}}</h2>
+        
+            <p>{{barticle.content}}</p>
+        </article>
+    </div>
+    {% endfor %}
+    
+</div>
+<script>
+    function openPage(pageName,elmnt,color) {
+      var i, tabcontent, tablinks;
+      tabcontent = document.getElementsByClassName("tabcontent");
+      for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+      }
+      tablinks = document.getElementsByClassName("tablink");
+      for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].style.backgroundColor = "";
+      }
+      document.getElementById(pageName).style.display = "block";
+      elmnt.style.backgroundColor = color;
+    }
+    
+    // Get the element with id="defaultOpen" and click on it
+    document.getElementById("defaultOpen").click();
+    </script>
+
+
+
+{% endfor %}
+{% endblock %}

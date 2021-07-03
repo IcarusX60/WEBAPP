@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %} {{cluster.cluster_no}}{% endblock %}
+
+{% block body %}
+<h1>Cluster {{cluster.cluster_no}}</h1>
+<br>
+<h4>{{cluster.article_set.all.count}} Items</h4>
+<br>
+<br>
+
+
+{% for article in cluster.article_set.all %}
+<article>
+    <h3>
+        <a href="{% url 'blog:article' article.id %}">{{article.headline}}</a>
+    </h3>
+    <br><br>
+   <!--<p>article.contetnt</p> --> 
+</article>
+
+
+{% endfor %}
+
+
+
+{% endblock %}

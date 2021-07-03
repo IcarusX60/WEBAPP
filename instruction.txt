@@ -1,0 +1,13 @@
+paths:
+mysite/views.py
+
+line no 21, 40, 64 ,97, 100
+
+goto link:
+localhost/clustering - to generate clusters
+localhost/prothomalo - to cluster prothomalo news
+
+
+to run run following command from WebApp/mysite directory:
+
+python manage.py runserver

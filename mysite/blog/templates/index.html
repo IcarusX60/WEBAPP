@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block title%} Document Clustering {% endblock %}
+{% block body %}
+
+<h3>Enter Text you want to assign to a cluster:</h3>
+<div class="container">
+    <form action="{% url 'blog:cluster' %}" method="POST">
+        <br>
+        {% csrf_token %}
+        <label for="text">Input Text</label>
+        <textarea name="text" id="text" cols="70" rows="20"></textarea>
+        <br><br>
+        <button type="submit" class="btn btn-primary" name="button">Cluster</button>
+    </form>
+
+</div>
+
+
+<br>
+<br>
+<br>
+
+{% for cluster in clusters %}
+<h1>Cluster No. {{cluster.cluster_no}}</h1>
+<h3>Total number of articles in cluster: {{cluster.item_count}}</h3>
+{% for article in cluster.article_set.all %}
+<article>
+    <h2>{{article.headline}}</h2>
+
+    <p>{{article.content}}</p>
+</article>
+{% endfor %}
+
+<h2></h2>
+
+{% endfor %}
+{% endblock %}
